@@ -88,6 +88,8 @@ class _HistoryPageState extends State<HistoryPage> {
     }
   }
 
+//AG-9: Atualizar Fichas
+
   void _editFicha(Map<String, dynamic> ficha) async {
     final groupController = TextEditingController(text: ficha['group']);
     final exerciseController =
