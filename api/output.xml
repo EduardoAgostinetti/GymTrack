@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.1 (Python 3.12.3 on linux)" generated="2025-06-26T21:45:07.806011" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="/home/eduardo/Documents/AtividadeLuiz/GymTrack/api/tests">
+<suite id="s1-s1" name="Test Api" source="/home/eduardo/Documents/AtividadeLuiz/GymTrack/api/tests/test_api.robot">
+<test id="s1-s1-t1" name="Verifica se servidor está rodando" line="8">
+<kw name="Create Session">
+<msg time="2025-06-26T21:45:07.820843" level="FAIL">No keyword with name 'Create Session' found.</msg>
+<arg>api</arg>
+<arg>${URL}</arg>
+<status status="FAIL" start="2025-06-26T21:45:07.820819" elapsed="0.000059">No keyword with name 'Create Session' found.</status>
+</kw>
+<kw name="Get Request">
+<var>${resp}</var>
+<arg>api</arg>
+<arg>/</arg>
+<status status="NOT RUN" start="2025-06-26T21:45:07.821006" elapsed="0.000013"/>
+</kw>
+<kw name="Status Should Be">
+<arg>200</arg>
+<status status="NOT RUN" start="2025-06-26T21:45:07.821125" elapsed="0.000039"/>
+</kw>
+<status status="FAIL" start="2025-06-26T21:45:07.820134" elapsed="0.001146">No keyword with name 'Create Session' found.</status>
+</test>
+<status status="FAIL" start="2025-06-26T21:45:07.819230" elapsed="0.002295"/>
+</suite>
+<status status="FAIL" start="2025-06-26T21:45:07.806564" elapsed="0.015214"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="0" fail="1" skip="0">Tests</stat>
+<stat name="Test Api" id="s1-s1" pass="0" fail="1" skip="0">Tests.Test Api</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-06-26T21:45:07.819890" level="ERROR">Error in file '/home/eduardo/Documents/AtividadeLuiz/GymTrack/api/tests/test_api.robot' on line 2: Importing library 'RequestsLibrary' failed: ModuleNotFoundError: No module named 'RequestsLibrary'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /home/eduardo/Documents/AtividadeLuiz/GymTrack/.venv/bin
+  /usr/lib/python312.zip
+  /usr/lib/python3.12
+  /usr/lib/python3.12/lib-dynload
+  /home/eduardo/Documents/AtividadeLuiz/GymTrack/.venv/lib/python3.12/site-packages</msg>
+</errors>
+</robot>
