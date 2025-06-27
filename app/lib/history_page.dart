@@ -10,7 +10,7 @@ class HistoryPage extends StatefulWidget {
   @override
   State<HistoryPage> createState() => _HistoryPageState();
 }
-
+//AG-10: Implementa exclusão de ficha
 class _HistoryPageState extends State<HistoryPage> {
   List<dynamic> fichas = [];
   bool isLoading = false;
