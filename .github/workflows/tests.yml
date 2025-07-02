@@ -34,7 +34,9 @@ jobs:
           node-version: '18'
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          cd api
+          npm install
 
       - name: Wait for PostgreSQL to be ready
         run: |
@@ -45,6 +47,7 @@ jobs:
 
       - name: Setup Database (e.g. Sequelize migrations)
         run: |
+          cd api
           npx sequelize-cli db:migrate
           npx sequelize-cli db:seed:all
         env:
@@ -54,5 +57,25 @@ jobs:
           DB_USER: postgres
           DB_PASSWORD: root
 
+      - name: Start API Server
+        run: |
+          cd api
+          npm run start &
+          sleep 5
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: gymtrack
+          DB_USER: postgres
+          DB_PASSWORD: root
+
       - name: Run Tests
-        run: npm test
+        run: |
+          cd api
+          npm test
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: gymtrack
+          DB_USER: postgres
+          DB_PASSWORD: root
