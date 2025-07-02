@@ -53,6 +53,7 @@ jobs:
       - name: Setup Database (Sequelize migrations & seeders)
         run: |
           cd api
+          NODE_ENV=development npx sequelize-cli db:create
           NODE_ENV=development npx sequelize-cli db:migrate
           NODE_ENV=development npx sequelize-cli db:seed:all
         env:
