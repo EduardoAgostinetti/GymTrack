@@ -9,6 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres:14
@@ -38,6 +39,10 @@ jobs:
           cd api
           npm install
 
+      - name: Fix permission for sequelize-cli
+        run: chmod +x ./node_modules/.bin/sequelize-cli
+        working-directory: api
+
       - name: Wait for PostgreSQL to be ready
         run: |
           until pg_isready -h localhost -p 5432 -U postgres; do
@@ -45,11 +50,11 @@ jobs:
             sleep 2
           done
 
-      - name: Setup Database (e.g. Sequelize migrations)
+      - name: Setup Database (Sequelize migrations & seeders)
         run: |
           cd api
-          npx sequelize-cli db:migrate
-          npx sequelize-cli db:seed:all
+          NODE_ENV=development npx sequelize-cli db:migrate
+          NODE_ENV=development npx sequelize-cli db:seed:all
         env:
           DB_HOST: localhost
           DB_PORT: 5432
@@ -68,6 +73,9 @@ jobs:
           DB_NAME: gymtrack
           DB_USER: postgres
           DB_PASSWORD: root
+          JWT_SECRET: root
+          EMAIL_USER: duducom195@gmail.com
+          EMAIL_PASS: rjj
 
       - name: Run Tests
         run: |
@@ -79,3 +87,6 @@ jobs:
           DB_NAME: gymtrack
           DB_USER: postgres
           DB_PASSWORD: root
+          JWT_SECRET: root
+          EMAIL_USER: duducom195@gmail.com
+          EMAIL_PASS: rjj
