@@ -66,8 +66,11 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Robot Framework
-        run: pip install robotframework
+      - name: Install Robot Framework and RequestsLibrary
+        run: |
+          pip install robotframework
+          pip install robotframework-requests
+
 
       - name: Start API Server
         run: |
