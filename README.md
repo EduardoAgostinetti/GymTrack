@@ -1,6 +1,6 @@
 # GymTrack
 
-Aplicativo Flutter para gerenciamento de usuários e fichas de treino de academia. O app permite que os usuários se registrem, façam login, recuperem senha e controlem suas rotinas de treino de forma organizada e intuitiva.
+Aplicativo Flutter para gerenciamento de usuários e fichas de treino de academia. O app permite que os usuários se registrem, façam login, recuperem senha e controlem suas rotinas de treino de forma organizada e intuitiva..
 
 ---
 
