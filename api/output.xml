@@ -1,55 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.1 (Python 3.12.3 on linux)" generated="2025-06-26T21:55:25.592101" rpa="false" schemaversion="5">
-<suite id="s1" name="Tests" source="/home/eduardo/Documents/AtividadeLuiz/GymTrack/api/tests">
-<suite id="s1-s1" name="Test Api" source="/home/eduardo/Documents/AtividadeLuiz/GymTrack/api/tests/test_api.robot">
-<test id="s1-s1-t1" name="Verifica se servidor está rodando" line="8">
+<robot generator="Robot 7.3.1 (Python 3.13.5 on win32)" generated="2025-07-02T13:18:13.100424" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Api" source="C:\Users\Eduardo\Desktop\Trabalho\GymTrack\api\tests\test_api.robot">
+<test id="s1-t1" name="Verifica se servidor está rodando" line="8">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-06-26T21:55:25.652262" level="INFO">Creating Session using : alias=api, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2025-07-02T13:18:13.458545" level="INFO">Creating Session using : alias=api, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>api</arg>
 <arg>${URL}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-06-26T21:55:25.651473" elapsed="0.000909"/>
+<status status="PASS" start="2025-07-02T13:18:13.458360" elapsed="0.000357"/>
 </kw>
 <kw name="Get Request" owner="RequestsLibrary">
-<msg time="2025-06-26T21:55:25.652510" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
-<msg time="2025-06-26T21:55:25.657482" level="INFO">GET Request : url=http://localhost:3000/ 
- path_url=/ 
- headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
- </msg>
-<msg time="2025-06-26T21:55:25.657545" level="INFO">GET Response : url=http://localhost:3000/ 
- status=404, reason=Not Found 
- headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Security-Policy': "default-src 'none'", 'X-Content-Type-Options': 'nosniff', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '139', 'Date': 'Fri, 27 Jun 2025 00:55:25 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
- body=&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8"&gt;
-&lt;title&gt;Error&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;pre&gt;Cannot GET /&lt;/pre&gt;
-&lt;/body&gt;
-&lt;/html&gt;
- 
- </msg>
-<msg time="2025-06-26T21:55:25.657614" level="INFO">${resp} = &lt;Response [404]&gt;</msg>
+<msg time="2025-07-02T13:18:13.458906" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-07-02T13:18:17.560364" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000025CDFE78980&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /</msg>
+<msg time="2025-07-02T13:18:21.857504" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000025CDFE66850&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /</msg>
+<msg time="2025-07-02T13:18:26.356025" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000025CDFE66AD0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /</msg>
+<msg time="2025-07-02T13:18:30.455938" level="FAIL">ConnectionError: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000025CDFE88050&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</msg>
 <var>${resp}</var>
 <arg>api</arg>
 <arg>/</arg>
 <doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
-<status status="PASS" start="2025-06-26T21:55:25.652491" elapsed="0.005137"/>
+<status status="FAIL" start="2025-07-02T13:18:13.458882" elapsed="17.014355">ConnectionError: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000025CDFE88050&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</status>
 </kw>
 <kw name="Status Should Be" owner="RequestsLibrary">
-<msg time="2025-06-26T21:55:25.657849" level="FAIL">Url: http://localhost:3000/ Expected status: 404 != 200</msg>
 <arg>200</arg>
 <doc>Fails if response status code is different than the expected.</doc>
-<status status="FAIL" start="2025-06-26T21:55:25.657732" elapsed="0.000631">Url: http://localhost:3000/ Expected status: 404 != 200</status>
+<status status="NOT RUN" start="2025-07-02T13:18:30.473491" elapsed="0.000023"/>
 </kw>
-<status status="FAIL" start="2025-06-26T21:55:25.650999" elapsed="0.007495">Url: http://localhost:3000/ Expected status: 404 != 200</status>
+<status status="FAIL" start="2025-07-02T13:18:13.457630" elapsed="17.016080">ConnectionError: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000025CDFE88050&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</status>
 </test>
-<status status="FAIL" start="2025-06-26T21:55:25.604542" elapsed="0.054176"/>
-</suite>
-<status status="FAIL" start="2025-06-26T21:55:25.592713" elapsed="0.066219"/>
+<status status="FAIL" start="2025-07-02T13:18:13.101507" elapsed="17.372616"/>
 </suite>
 <statistics>
 <total>
@@ -58,11 +37,13 @@
 <tag>
 </tag>
 <suite>
-<stat name="Tests" id="s1" pass="0" fail="1" skip="0">Tests</stat>
-<stat name="Test Api" id="s1-s1" pass="0" fail="1" skip="0">Tests.Test Api</stat>
+<stat name="Test Api" id="s1" pass="0" fail="1" skip="0">Test Api</stat>
 </suite>
 </statistics>
 <errors>
-<msg time="2025-06-26T21:55:25.652510" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-07-02T13:18:13.458906" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-07-02T13:18:17.560364" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000025CDFE78980&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /</msg>
+<msg time="2025-07-02T13:18:21.857504" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000025CDFE66850&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /</msg>
+<msg time="2025-07-02T13:18:26.356025" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000025CDFE66AD0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /</msg>
 </errors>
 </robot>
