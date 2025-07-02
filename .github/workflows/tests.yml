@@ -18,7 +18,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: root
-          POSTGRES_DB: sogoj
+          POSTGRES_DB: gymtrack
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -50,17 +50,24 @@ jobs:
             sleep 2
           done
 
-      - name: Setup Database (Sequelize migrations & seeders)
+      - name: Setup Database (Sequelize create DB)
         run: |
           cd api
           NODE_ENV=development npx sequelize-cli db:create
-
         env:
           DB_HOST: localhost
           DB_PORT: 5432
           DB_NAME: gymtrack
           DB_USER: postgres
           DB_PASSWORD: root
+
+      - name: Setup Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Robot Framework
+        run: pip install robotframework
 
       - name: Start API Server
         run: |
@@ -73,21 +80,14 @@ jobs:
           DB_NAME: gymtrack
           DB_USER: postgres
           DB_PASSWORD: root
-          JWT_SECRET: root
-          EMAIL_USER: duducom195@gmail.com
-          EMAIL_PASS: rjj
 
-      - name: Run Tests
+      - name: Run Robot Framework Tests
         run: |
           cd api
           npm run test:robot
-          
         env:
           DB_HOST: localhost
           DB_PORT: 5432
           DB_NAME: gymtrack
           DB_USER: postgres
           DB_PASSWORD: root
-          JWT_SECRET: root
-          EMAIL_USER: duducom195@gmail.com
-          EMAIL_PASS: rjj
