@@ -26,11 +26,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install Dependencies
         run: |
@@ -62,7 +64,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install Robot Framework
         run: |
@@ -97,7 +99,20 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          gh pr create --fill --base main --head ${{ github.ref_name }} || echo "PR already exists"
-          gh pr merge --auto --squash || echo "PR already merged or failed"
+
+          # Verifica se já existe PR aberta da branch atual para main
+          gh pr list --base main --head ${{ github.ref_name }} --state open --json number -q '.[0].number' > pr_number.txt || true
+          PR_NUMBER=$(cat pr_number.txt)
+
+          if [ -z "$PR_NUMBER" ]; then
+            echo "Creating new PR..."
+            gh pr create --fill --base main --head ${{ github.ref_name }}
+            PR_NUMBER=$(gh pr list --base main --head ${{ github.ref_name }} --state open --json number -q '.[0].number')
+          else
+            echo "PR already exists: #$PR_NUMBER"
+          fi
+
+          echo "Merging PR #$PR_NUMBER..."
+          gh pr merge "$PR_NUMBER" --squash --admin --delete-branch
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
