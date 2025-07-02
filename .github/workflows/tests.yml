@@ -1,13 +1,11 @@
-name: Run API Tests
+name: Run API Tests and Merge
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches-ignore: [main]
 
 jobs:
-  test:
+  test-and-merge:
     runs-on: ubuntu-latest
 
     services:
@@ -50,7 +48,7 @@ jobs:
             sleep 2
           done
 
-      - name: Setup Database (Sequelize create DB)
+      - name: Setup Database
         run: |
           cd api
           NODE_ENV=development npx sequelize-cli db:create || echo "Database already exists"
@@ -61,16 +59,15 @@ jobs:
           DB_USER: postgres
           DB_PASSWORD: root
 
-      - name: Setup Python 3.x
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Install Robot Framework and RequestsLibrary
+      - name: Install Robot Framework
         run: |
           pip install robotframework
           pip install robotframework-requests
-
 
       - name: Start API Server
         run: |
@@ -84,7 +81,7 @@ jobs:
           DB_USER: postgres
           DB_PASSWORD: root
 
-      - name: Run Robot Framework Tests
+      - name: Run Robot Tests
         run: |
           cd api
           npm run test:robot
@@ -94,3 +91,14 @@ jobs:
           DB_NAME: gymtrack
           DB_USER: postgres
           DB_PASSWORD: root
+
+      - name: Merge to main if tests passed
+        if: success()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          gh auth login --with-token <<< "${{ secrets.GH_PAT }}"
+          gh pr create --fill --base main --head ${{ github.ref_name }} || echo "PR already exists"
+          gh pr merge --auto --squash || echo "PR already merged or failed"
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
